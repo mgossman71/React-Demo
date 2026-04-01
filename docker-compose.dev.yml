@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  react-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: react-dev
+    ports:
+      - "${PORT:-5174}:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0
+    restart: unless-stopped

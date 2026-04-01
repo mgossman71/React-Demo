@@ -124,8 +124,21 @@ body {
   font-size: var(--text-base);
   line-height: 1.6;
   color: var(--text-primary);
-  background-color: var(--neutral-0);
+  background: linear-gradient(to bottom, #f8f9fa 0%, #f0f2f5 100%);
   overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(13, 44, 89, 0.03) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 img, picture, video, canvas, svg {
@@ -180,6 +193,7 @@ ul, ol {
 .section {
   padding: var(--space-4xl) 0;
   position: relative;
+  background: linear-gradient(to bottom, transparent 0%, rgba(13, 44, 89, 0.02) 100%);
 }
 
 /* =============================================================================
@@ -487,13 +501,27 @@ ul, ol {
    ============================================================================= */
 
 .services-section {
-  background: var(--neutral-0);
+  background: linear-gradient(to bottom, var(--neutral-0) 0%, #f8f9fa 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.services-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-600) 50%, transparent 100%);
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: var(--space-xl);
+  position: relative;
+  z-index: 1;
 }
 
 .service-card {
@@ -503,12 +531,31 @@ ul, ol {
   padding: var(--space-2xl);
   transition: all var(--transition-base);
   animation: fadeInUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-500) 0%, var(--accent-600) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base);
 }
 
 .service-card:hover {
   border-color: var(--primary-300);
   box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
 }
 
 .service-icon {
@@ -567,11 +614,25 @@ ul, ol {
 }
 
 .stat-card {
-  background: var(--neutral-0);
+  background: linear-gradient(135deg, var(--neutral-0) 0%, #f8f9fa 100%);
   padding: var(--space-xl);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   animation: fadeInUp 0.6s ease-out;
+  border-left: 4px solid var(--accent-600);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%);
+  transform: rotate(45deg);
 }
 
 .stat-value {
@@ -606,7 +667,7 @@ ul, ol {
 
 .visual-grid-item {
   aspect-ratio: 1;
-  background: linear-gradient(135deg, var(--gradient-primary) 0%, rgba(13, 44, 89, 0.9) 100%);
+  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-500) 100%);
   border-radius: var(--radius-lg);
   animation: gridItemPop 0.6s ease-out;
   animation-fill-mode: both;
@@ -623,6 +684,17 @@ ul, ol {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.visual-grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
 .visual-content {
   display: flex;
   flex-direction: column;
@@ -632,6 +704,7 @@ ul, ol {
   justify-content: center;
   z-index: 1;
   position: relative;
+  padding: var(--space-md);
 }
 
 .visual-icon {
@@ -639,6 +712,12 @@ ul, ol {
   line-height: 1;
   margin-bottom: var(--space-sm);
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .visual-title {

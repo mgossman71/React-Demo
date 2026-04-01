@@ -301,6 +301,13 @@ function Services() {
 }
 
 function WhyUs() {
+  const visualItems = [
+    { title: 'Expert Team', icon: '👨‍💼', desc: 'Certified professionals' },
+    { title: 'Proven Process', icon: '📋', desc: 'Structured methodology' },
+    { title: 'Fast Delivery', icon: '⚡', desc: 'Efficient execution' },
+    { title: 'Security First', icon: '🔐', desc: 'Enterprise-grade protection' },
+  ]
+
   return (
     <section id="why-us" className="section why-us-section">
       <div className="container">
@@ -324,8 +331,19 @@ function WhyUs() {
           </div>
           <div className="why-us-visual">
             <div className="visual-grid">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="visual-grid-item" style={{ animationDelay: `${i * 0.1}s` }}></div>
+              {visualItems.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="visual-grid-item"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  title={item.title}
+                >
+                  <div className="visual-content">
+                    <div className="visual-icon">{item.icon}</div>
+                    <div className="visual-title">{item.title}</div>
+                    <div className="visual-desc">{item.desc}</div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
